@@ -1,0 +1,52 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks.git
+    rev: v4.4.0
+    hooks:
+    -   id: check-added-large-files
+        args: ['--maxkb=90000']
+    -   id: check-ast
+        language_version: python3
+    -   id: check-case-conflict
+    -   id: check-docstring-first
+    -   id: check-json
+        language_version: python3
+    -   id: pretty-format-json
+    -   id: check-merge-conflict
+    -   id: check-xml
+        language_version: python3
+    -   id: check-yaml
+        language_version: python3
+    -   id: debug-statements
+    -   id: detect-aws-credentials
+    -   id: detect-private-key
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+        language_version: python3
+    -   id: file-contents-sorter
+-   repo: https://github.com/FalconSocial/pre-commit-python-sorter.git
+    rev: b57843b0b874df1d16eb0bef00b868792cb245c2
+    hooks:
+    -   id: python-import-sorter
+        args:
+        - --silent-overwrite
+        language_version: python3
+-   repo: https://github.com/detailyang/pre-commit-shell.git
+    rev: 1.0.4
+    hooks:
+    -   id: shell-lint
+        exclude: ^script/wait-for-it.sh$
+        args:
+        - --exclude=SC1072,SC1073,SC2068
+-   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+    rev: v1.3.0
+    hooks:
+    -   id: python-safety-dependencies-check
+-   repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: v1.4.3
+    hooks:
+    -   id: autopep8
+        args:
+        - -i
+        - --ignore=E501
+        language_version: python3
+exclude: 'artifacts/layers/.*'
