@@ -35,14 +35,12 @@ path_layers = "./artifacts/layers/"
 path_stage_jobs = "./artifacts/stage/jobs/"
 path_raw_jobs = './artifacts/raw/general/glue/'
 
-
 def add_enviroment(lambda_function: _lambda, values_and_keys: dict):
     try:
         for value in values_and_keys:
             lambda_function.add_environment(value, values_and_keys[value])
     except Exception as e:
         logger.error("Exception : {}".format(e))
-
 
 def get_path_since_directory_by_string(path, directory, string):
     for subdir, dirs, files in os.walk(path):
@@ -51,7 +49,6 @@ def get_path_since_directory_by_string(path, directory, string):
                 full_path = os.path.join(subdir, file)
                 return full_path[full_path.index(directory):]
     raise Exception(f"No {string} string found in filenames in path: {path}")
-
 
 class DatalakeIngestionStack(Stack):
 
@@ -128,7 +125,6 @@ class DatalakeIngestionStack(Stack):
             resources=[failed_topic.topic_arn, success_topic.topic_arn]
         )
         
-        
         s3_deployment.BucketDeployment(
             self,
             f"aje-{props['Environment']}-raw-jobs",
@@ -148,7 +144,6 @@ class DatalakeIngestionStack(Stack):
             destination_bucket=artifacts_bucket,
             destination_key_prefix=path_to_bucket_stage_jobs_scripts
         )
-        
 
         subnet_oracle = props['ORACLE_REPLICATION_SUBNET_IDENTIFIER']
         security_groups_oracle = props['ORACLE_VPC_SECURITY_GROUP_IDENTIFIER']
